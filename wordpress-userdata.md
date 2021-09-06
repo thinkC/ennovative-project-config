@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir /var/www/
-sudo mount -t efs -o tls,accesspoint=fsap-058132461ff5986d5 fs-ae5b7c1a:/ /var/www/
+sudo mount -t efs -o tls,accesspoint=fsap-0f83b4e624a5d25a5 fs-d3b18267:/ /var/www/
 yum install -y httpd 
 systemctl start httpd
 systemctl enable httpd
@@ -17,7 +17,7 @@ mkdir /var/www/html/
 cp -R /wordpress/* /var/www/html/
 cd /var/www/html/
 touch healthstatus
-sed -i "s/localhost/ennovative-database.ccsif1mqniv8.us-east-1.rds.amazonaws.com/g" wp-config.php 
+sed -i "s/localhost/ennovativedb.ccsif1mqniv8.us-east-1.rds.amazonaws.com/g" wp-config.php 
 sed -i "s/username_here/admin/g" wp-config.php 
 sed -i "s/password_here/password12345/g" wp-config.php 
 sed -i "s/database_name_here/wordpressdb/g" wp-config.php 

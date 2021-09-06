@@ -1,6 +1,6 @@
 #!/bin/bash
 mkdir /var/www/
-sudo mount -t efs -o tls,accesspoint=fsap-0639536ac0e0a3aaf fs-ae5b7c1a:/ /var/www/
+sudo mount -t efs -o tls,accesspoint=fsap-0a62078752cebe182 fs-d3b18267:/ /var/www/
 yum install -y httpd 
 systemctl start httpd
 systemctl enable httpd
@@ -16,7 +16,7 @@ cd /tooling-1
 mysql -h ennovative-database.ccsif1mqniv8.us-east-1.rds.amazonaws.com -u admin -p toolingdb < tooling-db.sql
 cd /var/www/html/
 touch healthstatus
-sed -i "s/$db = mysqli_connect('mysql.tooling.svc.cluster.local', 'admin', 'admin', 'tooling');/$db = mysqli_connect('ennovative-database.ccsif1mqniv8.us-east-1.rds.amazonaws.com ', 'admin', 'password12345', 'toolingdb');/g" functions.php
+sed -i "s/$db = mysqli_connect('mysql.tooling.svc.cluster.local', 'admin', 'admin', 'tooling');/$db = mysqli_connect('ennovativedb.ccsif1mqniv8.us-east-1.rds.amazonaws.com', 'admin', 'password12345', 'toolingdb');/g" functions.php
 chcon -t httpd_sys_rw_content_t /var/www/html/ -R
 systemctl restart httpd
 
